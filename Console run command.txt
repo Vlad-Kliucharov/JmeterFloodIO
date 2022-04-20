@@ -1,0 +1,1 @@
+.\jmeter -n -t C:\apache-jmeter-5.4.1\bin\Projects\Flood.io\SurveyCheck.jmx -l C:\apache-jmeter-5.4.1\bin\Projects\Flood.io\csvReports\result.csv -e -o C:\apache-jmeter-5.4.1\bin\Projects\Flood.io\HTMLReport\HTMLReport
