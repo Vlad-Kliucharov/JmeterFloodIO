@@ -17,7 +17,7 @@ jobs:
         uses: Vlad-Kliucharov/JmeterFloodIO-Influx@v1.0
         with:
           test-plan-path: JmeterFloodIO-Influx/SurveyCheck.jmx
-          args: "-H 192.168.0.181"
+          args: "-H 192.168.0.181 -p 8088"
           
       - name: Upload Results
         uses: actions/upload-artifact@v2
