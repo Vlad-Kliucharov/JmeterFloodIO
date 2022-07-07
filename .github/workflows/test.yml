@@ -15,7 +15,7 @@ jobs:
         uses: Vlad-Kliucharov/JmeterFloodIO-Influx
 
         with:
-          testFilePath: JmeterFloodIO-Influx/SurveyCheck.jmx
+          testFilePath: SurveyCheck.jmx
           outputReportsFolder: reports/
           args: "--loglevel INFO"
 
