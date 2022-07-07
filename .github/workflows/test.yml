@@ -1,4 +1,4 @@
-  # This is a workflow to help you run all JMeter scripts with Actions, and save Test Results as artifact
+# This is a workflow to help you run all JMeter scripts with Actions, and save Test Results as artifact
 
 name: jmeter_test_results
 
@@ -29,8 +29,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Vlad-Kliucharov/JmeterFloodIO-Influx@v1
+      - name: Vlad-Kliucharov/JmeterFloodIO-Influx
+      - uses: Vlad-Kliucharov/JmeterFloodIO-Influx@v1
+        with:
+          testFilePath: JmeterFloodIO-Influx/SurveyCheck.jmx
         run: |
            pwd
            ls
