@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run JMeter Action on a test
-        uses: Vlad-Kliucharov/JmeterFloodIO-Influx@v0.5.0
+        uses: Vlad-Kliucharov/JmeterFloodIO-Influx@1
 
         with:
           testFilePath: JmeterFloodIO-Influx/SurveyCheck.jmx
