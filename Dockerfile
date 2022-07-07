@@ -9,6 +9,7 @@ ENV MIRROR_HOST http://mirrors.ocf.berkeley.edu/apache/jmeter
 ENV JMETER_DOWNLOAD_URL ${MIRROR_HOST}/binaries/apache-jmeter-${JMETER_VERSION}.tgz
 RUN     apk update \
         && apk upgrade \
+        && apk add dos2unix \
         && apk add ca-certificates \
         && update-ca-certificates \
         && apk add --update openjdk8-jre tzdata curl unzip bash \
