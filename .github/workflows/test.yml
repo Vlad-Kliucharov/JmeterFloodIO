@@ -8,23 +8,23 @@ on:
     branches:
       - master
 
+env:
+  TEST_NAME: SurveyCheck
+  VUSERS: 15 
+  RAMP_UP: 150
+  DURATION: 100
+  JVM_ARGS: -Xms1g -Xmx2g -Xmx256m
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
+
   # This workflow contains a single job called "build"
   action_build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      TEST_NAME: SurveyCheck
-      VUSERS: '15' 
-      RAMP_UP: '150'
-      DURATION: '100'
-      JVM_ARGS: '-Xms1g -Xmx2g -Xmx256m'
-      
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
           mkdir $GITHUB_WORKSPACE/Reports
       # Runs a set of commands using the runners shell
       - name: JMeter Test
-        run: docker run --name jcont --env -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE jmeter -n -t $GITHUB_WORKSPACE/$TEST_NAME.jmx -JVUsers=$VUSERS -JRamp_Up=$RAMP_UP -JDuration=$DURATION -l $GITHUB_WORKSPACE/Reports/test.jtl -e -o $GITHUB_WORKSPACE/Reports
+        run: docker run --name jcont --env '$JVM_ARGS' -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE jmeter -n -t $GITHUB_WORKSPACE/$TEST_NAME.jmx -JVUsers=$VUSERS -JRamp_Up=$RAMP_UP -JDuration=$DURATION -l $GITHUB_WORKSPACE/Reports/test.jtl -e -o $GITHUB_WORKSPACE/Reports
           # try {
           #   sh """docker run --name jcont --env $JVM_ARGS -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} jmeter -n -t ${GITHUB_WORKSPACE}/${TEST_NAME}.jmx -JVUsers=${VUSERS} -JRamp_Up=${RAMP_UP} -JDuration=${DURATION} -l ${GITHUB_WORKSPACE}/Reports/test.jtl -e -o ${GITHUB_WORKSPACE}/Reports"""
           # } catch (error) {
