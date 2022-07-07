@@ -13,15 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run JMeter Action on a test
+      - name: JMeter Test
         uses: Vlad-Kliucharov/JmeterFloodIO-Influx@v1.0
-
         with:
-          testFilePath: JmeterFloodIO-Influx/SurveyCheck.jmx
-          outputReportsFolder: reports/
-          args: "--loglevel INFO"
-
-      - uses: actions/upload-artifact@v1
+          test-plan-path: JmeterFloodIO-Influx/SurveyCheck.jmx
+          args: "-H 192.168.0.181"
+          
+      - name: Upload Results
+        uses: actions/upload-artifact@v2
         with:
-          name: jmeter-test-results
-          path: reports/
+          name: jmeter-results
+          path: result.jtl
