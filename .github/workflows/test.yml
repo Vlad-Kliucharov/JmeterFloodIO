@@ -11,15 +11,21 @@ jobs:
   action_build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo content
       - uses: actions/checkout@v2
+
+      - name: create Reports dir
+        run: |
+          mkdir $GITHUB_WORKSPACE/Reports
 
       - name: JMeter Test
         uses: Vlad-Kliucharov/JmeterFloodIO-Influx@v1.0
         with:
           test-plan-path: JmeterFloodIO-Influx/SurveyCheck.jmx
+          run: docker run --name jmeter -n -t SurveyCheck.jmx -JVUsers=15 -JRamp_Up=$150 -JDuration=15 -l $GITHUB_WORKSPACE/Reports/test.jtl -e -o $GITHUB_WORKSPACE/Reports
           
       - name: Upload Results
-        uses: actions/upload-artifact@v2
+        uses: actions/Reports
         with:
           name: jmeter-results
           path: result.jtl
