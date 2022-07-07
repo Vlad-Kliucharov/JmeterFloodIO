@@ -32,8 +32,8 @@ jobs:
       - name: Create image
         run: docker build -t jmeter .
 
-      # - name: Create container
-      #   run: docker run -t --name jcont jmeter
+      - name: Create container
+        run: docker run -t --name jcont jmeter
         
       - name: create Reports dir
         run: |
