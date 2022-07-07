@@ -48,5 +48,6 @@ jobs:
       - name: Upload JMeter Test Results
         uses: actions/upload-artifact@v2
         with:
+         image: "jmeter:latest"
          name: test_results
          path: $GITHUB_WORKSPACE/Reports
