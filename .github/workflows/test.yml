@@ -4,10 +4,10 @@ name: jmeter_test_results
 
 env:
   TEST_NAME: SurveyCheck
-  VUSERS: 15 
-  RAMP_UP: 150
-  DURATION: 100
-  JVM_ARGS: -Xms1g -Xmx2g -Xmx256m
+  VUSERS: '15' 
+  RAMP_UP: '150'
+  DURATION: '100'
+  JVM_ARGS: '-Xms1g -Xmx2g -Xmx256m'
 
 # Controls when the workflow will run
 on:
