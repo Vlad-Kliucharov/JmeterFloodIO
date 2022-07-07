@@ -32,12 +32,16 @@ jobs:
       - name: Create image
         run: docker build -t jmeter .
 
+      - name: Create container
+        run: docker run -it --name jcont jmeter
+        
+
       - name: create Reports dir
         run: |
           mkdir $GITHUB_WORKSPACE/Reports
       # Runs a set of commands using the runners shell
       - name: JMeter Test
-        run: docker run --name jmeter -n -t JmeterFloodIO-Influx/SurveyCheck.jmx -JVUsers=15 -JRamp_Up=$150 -JDuration=15 -l $GITHUB_WORKSPACE/Reports/test.jtl -e -o $GITHUB_WORKSPACE/Reports
+        run: docker run --name jcont --env jmeter -n -t JmeterFloodIO-Influx/SurveyCheck.jmx -JVUsers=15 -JRamp_Up=$150 -JDuration=15 -l $GITHUB_WORKSPACE/Reports/test.jtl -e -o $GITHUB_WORKSPACE/Reports
      
       # - name: Upload JMeter Test Results
       #   uses: actions/upload-artifact@v2.2.4
