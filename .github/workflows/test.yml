@@ -39,6 +39,12 @@ jobs:
         run: |
           mkdir $GITHUB_WORKSPACE/Reports
 
+      - name: Create "grafana" volume
+        run: docker volume create --name=grafana-volume
+
+      - name: Create "influxdb" volume
+        run: docker volume create --name=influxdb-volume
+
       - name: Run docker-compose
         run: docker-compose -f docker-compose-influx.yml up -d 
 
