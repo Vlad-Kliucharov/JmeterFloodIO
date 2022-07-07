@@ -3,11 +3,11 @@
 name: jmeter_test_results
 
 env:
-  TEST_NAME: SurveyCheck.jmx
-  VUSERS: 15
-  RAMP_UP: 150
-  DURATION: 100
-  JVM_ARGS: -Xms1g -Xmx2g -Xmx256m
+TEST_NAME: SurveyCheck
+VUSERS: 15 
+RAMP_UP: 150
+DURATION: 100
+JVM_ARGS: -Xms1g -Xmx2g -Xmx256m
 
 # Controls when the workflow will run
 on:
@@ -25,12 +25,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Vlad-Kliucharov/JmeterFloodIO-Influx
-        with:
-          testFilePath: JmeterFloodIO-Influx/SurveyCheck.jmx
-          outputReportsFolder: $GITHUB_WORKSPACE/Reports
-
       - name: create Reports dir
         run: |
           mkdir $GITHUB_WORKSPACE/Reports
