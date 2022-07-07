@@ -33,7 +33,7 @@ jobs:
         run: docker build -t jmeter .
 
       - name: Create container
-        run: docker run -it --name jcont jmeter
+        run: docker run -t --name jcont jmeter
         
 
       - name: create Reports dir
