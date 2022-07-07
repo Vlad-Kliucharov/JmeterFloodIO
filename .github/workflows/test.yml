@@ -33,7 +33,7 @@ jobs:
         run: docker build -t jmeter .
 
       - name: Create container
-        run: docker run -it --name jcont jmeter
+        run: docker run -t --name jcont jmeter
         
       - name: create Reports dir
         run: |
@@ -41,7 +41,7 @@ jobs:
 
       - name: JMeter Test
         run: docker run --name jcont --env '$JVM_ARGS' -v ${WORKSPACE}:${WORKSPACE} jmeter -n -t ${WORKSPACE}/${TEST_NAME}.jmx -JVUsers=${VUSERS} -JRamp_Up=${RAMP_UP} -JDuration=${DURATION} -l ${WORKSPACE}/Reports/test.jtl -e -o ${WORKSPACE}/Reports
-
+     
       # - name: Upload JMeter Test Results
       #   uses: actions/upload-artifact@v2.2.4
       #   with:
