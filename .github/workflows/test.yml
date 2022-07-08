@@ -24,16 +24,10 @@ jobs:
   # This workflow contains a single job called "build"
   action_build:
     # The type of runner that the job will run on
-    runs-on: 192.168.0.181
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v2
-
-      - name: Create image
-        run: docker build -t jmeter .
-
-      - name: Create container
-        run: docker run -t --name jcont jmeter
         
       - name: create Reports dir
         run: |
@@ -42,10 +36,16 @@ jobs:
       - name: Remove exists container
         run: docker rm --force jcont
 
-      - name: JMeter Test
-        run: docker run --name jcont --env '$JVM_ARGS' -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE jmeter -n -t $GITHUB_WORKSPACE/$TEST_NAME.jmx -JVUsers=$VUSERS -JRamp_Up=$RAMP_UP -JDuration=$DURATION -l $GITHUB_WORKSPACE/Reports/test.jtl
-
-      # - name: Upload JMeter Test Results
-      #   uses: actions/docker-image-artifact-upload@v1
+      - name: Run Jmeter
+        uses: Vlad-Kliucharov/JmeterFloodIO-Influx@v1.0
+        with:
+          test-plan-path: docker run --name jcont --env '$JVM_ARGS' -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE jmeter -n -t $GITHUB_WORKSPACE/$TEST_NAME.jmx -JVUsers=$VUSERS -JRamp_Up=$RAMP_UP -JDuration=$DURATION -l $GITHUB_WORKSPACE/Reports/test.jtl
+          args: "-H 192.168.0.181 -P 8000"
+      # - name: Upload a Build Artifact
+      #   uses: actions/upload-artifact@v3.1.0
       #   with:
-      #    path: $GITHUB_WORKSPACE/Reports
+      #     # Artifact name
+      #     name: # optional, default is artifact
+      #     # A file, directory or wildcard pattern that describes what to upload
+      #     path: 
+      #     # The desired behavior if no files are found using the provided path.
