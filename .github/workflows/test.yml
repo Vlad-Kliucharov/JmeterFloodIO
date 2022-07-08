@@ -45,7 +45,7 @@ jobs:
       - name: JMeter Test
         run: docker run --name jcont --env '$JVM_ARGS' -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE jmeter -n -t $GITHUB_WORKSPACE/$TEST_NAME.jmx -JVUsers=$VUSERS -JRamp_Up=$RAMP_UP -JDuration=$DURATION -l $GITHUB_WORKSPACE/Reports/test.jtl
 
-      - name: Upload JMeter Test Results
-        uses: actions/docker-image-artifact-upload@v1
-        with:
-         path: $GITHUB_WORKSPACE/Reports
+      # - name: Upload JMeter Test Results
+      #   uses: actions/docker-image-artifact-upload@v1
+      #   with:
+      #    path: $GITHUB_WORKSPACE/Reports
