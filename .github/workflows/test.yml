@@ -39,15 +39,6 @@ jobs:
         run: |
           mkdir $GITHUB_WORKSPACE/Reports
 
-      - name: Create "grafana" volume
-        run: docker volume create --name=grafana-volume
-
-      - name: Create "influxdb" volume
-        run: docker volume create --name=influxdb-volume
-
-      - name: Run docker-compose
-        run: docker-compose -f docker-compose-influx.yml up -d 
-
       - name: Remove exists container
         run: docker rm --force jcont
 
@@ -57,7 +48,7 @@ jobs:
       - name: Upload JMeter Test Results
         uses: actions/$GITHUB_WORKSPACE/Reports
         with:
-         path: "jmeter:latest"
+         path: Reports
       # - name: Upload JMeter Test Results
       #   uses: actions/docker-image-artifact-upload@v1
       #   with:
