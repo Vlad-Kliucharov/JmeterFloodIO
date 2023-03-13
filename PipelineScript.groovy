@@ -13,7 +13,7 @@ properties([parameters([
         cleanWs()
     }
     stage('Checkout external proj') {
-        git credentialsId: 'GitCreds', url: 'https://github.com/Vlad-Kliucharov/JmeterFloodIO-Influx.git'   
+        git branch: 'main', credentialsId: 'GitCreds', url: 'https://github.com/Vlad-Kliucharov/JmeterFloodIO-Influx.git'
     }
     stage('JMeter Test') {
         sh 'mkdir Reports'
