@@ -13,15 +13,19 @@ properties([parameters([
         cleanWs()
     }
     stage('Checkout external proj') {
+<<<<<<< HEAD
         git branch: 'main', credentialsId: 'GitCreds', url: 'https://github.com/Vlad-Kliucharov/JmeterFloodIO-Influx.git'
+=======
+        git credentialsId: 'GitCredential', url: 'https://git.epam.com/vladyslav_kliucharov/test-script-flood.io-jmx.git'    
+>>>>>>> parent of cc6944a (Added backend listner)
     }
     stage('JMeter Test') {
         sh 'mkdir Reports'
         try {
-            sh """docker run --name jmeter --env '$JVM_ARGS' -v ${WORKSPACE}:${WORKSPACE} jmeter -n -t ${WORKSPACE}/${TEST_NAME}.jmx -JVUsers=${VUSERS} -JRamp_Up=${RAMP_UP} -JDuration=${DURATION} -l ${WORKSPACE}/Reports/test.jtl -e -o ${WORKSPACE}/Reports"""
+            sh """docker run --name jcont --env '$JVM_ARGS' -v ${WORKSPACE}:${WORKSPACE} jmeter -n -t ${WORKSPACE}/${TEST_NAME}.jmx -JVUsers=${VUSERS} -JRamp_Up=${RAMP_UP} -JDuration=${DURATION} -l ${WORKSPACE}/Reports/test.jtl -e -o ${WORKSPACE}/Reports"""
         } catch (error) {
-            sh "docker rm --force jmeter"
-            sh """docker run --name jmeter --env '$JVM_ARGS' -v ${WORKSPACE}:${WORKSPACE} jmeter -n -t ${WORKSPACE}/${TEST_NAME}.jmx -JVUsers=${VUSERS} -JRamp_Up=${RAMP_UP} -JDuration=${DURATION} -l ${WORKSPACE}/Reports/test.jtl -e -o ${WORKSPACE}/Reports"""
+            sh "docker rm --force jcont"
+            sh """docker run --name jcont --env '$JVM_ARGS' -v ${WORKSPACE}:${WORKSPACE} jmeter -n -t ${WORKSPACE}/${TEST_NAME}.jmx -JVUsers=${VUSERS} -JRamp_Up=${RAMP_UP} -JDuration=${DURATION} -l ${WORKSPACE}/Reports/test.jtl -e -o ${WORKSPACE}/Reports"""
         }
     }
     stage('Reporting'){
